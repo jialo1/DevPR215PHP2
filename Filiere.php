@@ -62,17 +62,4 @@ class Filiere
             ===============================================================<br/>";
         }
     }
-
-    $filiere = new Filiere(1, "Programmation", "Programmation et developpement d'application web et mobile");
-    $filiere1 = new Filiere(2, "Marketing", "Marketing et Communiction");
-
-    echo $filiere."<br/>";
-    echo $filiere1."<br/>";
-
-    //modification des valeurs
-    $filiere->setId(500);
-    $filiere->setNom("GRH");
-    $filiere->setDescription("Gestion des Ressources Humaines");
-    echo $filiere;
-    echo "Nombre de filiere cree: ".Filiere::getNombreFiliereCree()."<br/>";
     

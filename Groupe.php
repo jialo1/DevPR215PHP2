@@ -9,15 +9,16 @@
         private $id;
         private $nom;
         private $niveauEtude;
-        private static $nombreGroupeCree = 0 ;
+        private $filiere;
+        private $anneeAcademique;
 
-        function __construct($id, $nom, $niveauEtude)
+        function __construct($id, $nom, $niveauEtude, Filiere $filiere, AnneeAcademique $anneeAcademique)
         {
         $this -> id = $id;
         $this -> niveauEtude = $niveauEtude;
-        $this -> salle = $salle;
         $this -> nom = $nom;
-        self::$nombreGroupeCree++;
+        $this -> filiere = $filiere;
+        $this -> anneeAcademique = $anneeAcademique;
         }
 
         public function getId()
@@ -35,6 +36,16 @@
             return $this->niveauEtude;
         }
 
+        public function getFiliere()
+        {
+            return $this->filiere;
+        }
+
+        public function getAnneeAcademique()
+        {
+            return $this->anneeAcademique;
+        }
+
         public function setId($id)
         {
             $this->id = $id;
@@ -50,31 +61,29 @@
             $this->niveauEtude = $niveauEtude;
         }
 
-        public static function getNombreGroupeCree()
+        public function setFiliere(Filiere $filiere)
         {
-            return self::$nombreGroupeCree;
+            $this->filiere = $filiere;
+        }
+
+        public function setAnneeAcademique(AnneeAcademique $anneeAcademique)
+        {
+            $this->anneeAcademique = $anneeAcademique;
         }
 
         function __toString()
         {
-            return "Id: ".$this->getId()."</br>
+            return "Nom du groupe: ".$this->getNom()."</br>
             Niveau d'etude: ".$this->getNiveauEtude()."</br>
-            Nom du groupe: ".$this->getNom()."</br>
+            Filiere : ".$this->filiere->getNom()."</br>
+            Annee Academique: ".$this->anneeAcademique->getDesignation()."</br>
             ===============================================================<br/>";
         }
     }
 
-$groupe = new Groupe(1, "L2", "PR-215");
-$groupe1 = new Groupe(2, "L1", "PR-211");
-$groupe2 = new Groupe(3, "L1", "PR-211");
+    //Test
+    $filiere = new Filiere(1, "Programmation", "Programmation et developpement d'application web et mobile");
+    $anneeAcademique = new AnneeAcademique(1, "2020-2021");
+    $groupe = new Groupe(1, "PR-215", "Licence 2", $filiere, $anneeAcademique);
 
-echo $groupe;
-echo $groupe1;
-echo $groupe2;
-
-$groupe->setId(1);
-$groupe->setNiveauEtude("L2");
-$groupe->setNom("PR-215");
-echo "(modifie)</br>".$groupe;
-
-echo "Nombre de Groupe crees: ".Groupe::getNombreGroupeCree()."<br/>";
+    echo $groupe;
